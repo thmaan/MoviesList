@@ -31,7 +31,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.481"
-                app:srcCompat="@drawable/tenor" />
+                app:srcCompat="@drawable/ic_people_black_24dp" />
 
 
             <TextView
