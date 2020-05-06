@@ -24,7 +24,7 @@ public class MoviesListFragment extends Fragment implements View.OnClickListener
     }
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
 
-        view = inflater.inflate(R.layout.fragment_list, container, false);
+        view = inflater.inflate(R.layout.fragment_list_movies, container, false);
         return view;
     }
 

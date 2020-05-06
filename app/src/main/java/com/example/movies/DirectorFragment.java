@@ -23,7 +23,7 @@ public class DirectorFragment extends Fragment implements View.OnClickListener {
          void fragmentContactActivity(int a);
     }
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
-        view = inflater.inflate(R.layout.fragment_second, container, false);
+        view = inflater.inflate(R.layout.fragment_director_list, container, false);
         return view;
     }
 
