@@ -39,7 +39,8 @@
             android:id="@+id/year"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Release Year" />
+            android:hint="Release Year"
+            android:inputType="date"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

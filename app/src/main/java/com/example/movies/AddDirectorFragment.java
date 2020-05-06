@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -38,9 +39,20 @@ public class AddDirectorFragment extends Fragment {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Director director = new Director(Objects.requireNonNull(name.getText()).toString(), Objects.requireNonNull(year.getText()).toString());
-                ApplicationClass.directors.add(director);
-                fragmentCommunicator.fragmentContactActivity(5);
+                Boolean fieldsFilled = Boolean.TRUE;
+                if(name.getText().toString().isEmpty()){
+                    Toast.makeText( getActivity(), "Name needed", Toast.LENGTH_SHORT ).show();
+                    fieldsFilled = false;
+                }
+                if(year.getText().toString().isEmpty()){
+                    Toast.makeText( getActivity(), "Birth Date Needed", Toast.LENGTH_SHORT ).show();
+                    fieldsFilled = false;
+                }
+                if(fieldsFilled) {
+                    Director director = new Director(Objects.requireNonNull(name.getText()).toString(), Objects.requireNonNull(year.getText()).toString());
+                    ApplicationClass.directors.add(director);
+                    fragmentCommunicator.fragmentContactActivity(5);
+                }
             }
         });
         return view;

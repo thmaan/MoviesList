@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -39,9 +40,20 @@ public class AddActorFragment extends Fragment {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Actor actor = new Actor(Objects.requireNonNull(name.getText()).toString(), Objects.requireNonNull(year.getText()).toString());
-                ApplicationClass.actors.add(actor);
-                fragmentCommunicator.fragmentContactActivity(4);
+                Boolean fieldsFilled = Boolean.TRUE;
+                if(name.getText().toString().isEmpty()){
+                    Toast.makeText( getActivity(), "Name needed", Toast.LENGTH_SHORT ).show();
+                    fieldsFilled = false;
+                }
+                if(year.getText().toString().isEmpty()){
+                    Toast.makeText( getActivity(), "Birth Date Needed", Toast.LENGTH_SHORT ).show();
+                    fieldsFilled = false;
+                }
+                if(fieldsFilled){
+                    Actor actor = new Actor(Objects.requireNonNull(name.getText()).toString(), Objects.requireNonNull(year.getText()).toString());
+                    ApplicationClass.actors.add(actor);
+                    fragmentCommunicator.fragmentContactActivity(4);
+                }
             }
         });
         return view;

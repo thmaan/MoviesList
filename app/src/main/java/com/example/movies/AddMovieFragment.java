@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -29,6 +30,7 @@ public class AddMovieFragment extends Fragment {
     private TextInputEditText title;
     private Actor newActor;
     private Director newDirector;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class AddMovieFragment extends Fragment {
         protagonist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               newActor = (Actor) parent.getSelectedItem();
+                newActor = (Actor) parent.getSelectedItem();
             }
 
             @Override
@@ -78,16 +80,31 @@ public class AddMovieFragment extends Fragment {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApplicationClass.movies.add(new Movie(Objects.requireNonNull(title.getText()).toString(),
-                        Objects.requireNonNull(year.getText()).toString(),
-                        Objects.requireNonNull(genre.getText()).toString(),
-                        newDirector,newActor));
-                fragmentCommunicator.fragmentContactActivity(3);
+                Boolean fieldsFilled = Boolean.TRUE;
+                if (title.getText().toString().isEmpty()) {
+                    Toast.makeText(getActivity(), "Title needed", Toast.LENGTH_SHORT).show();
+                    fieldsFilled = false;
+                }
+                if (genre.getText().toString().isEmpty()) {
+                    Toast.makeText(getActivity(), "Genre needed", Toast.LENGTH_SHORT).show();
+                    fieldsFilled = false;
+                }
+                if (year.getText().toString().isEmpty()) {
+                    Toast.makeText(getActivity(), "Release Date Needed", Toast.LENGTH_SHORT).show();
+                    fieldsFilled = false;
+                }
+                if (fieldsFilled) {
+                    ApplicationClass.movies.add(new Movie(Objects.requireNonNull(title.getText()).toString(),
+                            Objects.requireNonNull(year.getText()).toString(),
+                            Objects.requireNonNull(genre.getText()).toString(),
+                            newDirector, newActor));
+                    fragmentCommunicator.fragmentContactActivity(3);
+                }
             }
         });
         return view;
-
     }
+
 
     @Override
     public void onAttach(@NonNull Context context) {
