@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,10 +28,12 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvNamePerson;
         TextView tvBirthDate;
+        ImageView profile;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNamePerson = itemView.findViewById(R.id.tvNamePerson);
             tvBirthDate = itemView.findViewById(R.id.tvBirthDate);
+            profile = itemView.findViewById(R.id.profile);
         }
     }
     @NonNull
@@ -44,6 +47,7 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ActorAdapter.ViewHolder holder, int position) {
         holder.itemView.setTag(actors.get(position));
 
+        holder.profile.setImageResource(actors.get(position).getPicture());
         holder.tvNamePerson.setText(actors.get(position).getName());
         holder.tvBirthDate.setText(actors.get(position).getBirthDate());
 

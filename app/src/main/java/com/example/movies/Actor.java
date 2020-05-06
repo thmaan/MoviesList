@@ -3,10 +3,12 @@ package com.example.movies;
 public class Actor {
     private String name;
     private String birthDate;
+    private int picture;
 
     public Actor(String name, String birthDate) {
         this.name = name;
         this.birthDate = birthDate;
+        picture = R.drawable.tenor;
     }
 
     public String getName() {
@@ -19,6 +21,10 @@ public class Actor {
 
     public String getBirthDate() {
         return birthDate;
+    }
+
+    public int getPicture() {
+        return picture;
     }
 
     public void setBirthDate(String birthDate) {

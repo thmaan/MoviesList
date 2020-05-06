@@ -1,7 +1,6 @@
 package com.example.movies;
 
 import android.content.Context;
-import android.media.AsyncPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,20 +13,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AddMovieFragment extends Fragment {
-    ListFragment.FragmentCommunicator fragmentCommunicator;
+    MoviesListFragment.FragmentCommunicator fragmentCommunicator;
 
     private Button buttonAdd;
     private TextInputEditText genre;
@@ -35,11 +29,6 @@ public class AddMovieFragment extends Fragment {
     private TextInputEditText title;
     public Spinner director;
     public Spinner protagonist;
-    AddMovieFragment addMovieFragment;
-    AddDirectorFragment addDirectorFragment;
-    AddActorFragment addActorFragment;
-    String selectedActor;
-    String selectedDirector;
     Actor newActor;
     Director newDirector;
     public interface FragmentCommunicator {
@@ -102,7 +91,7 @@ public class AddMovieFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         if (context instanceof FragmentCommunicator) {
-            fragmentCommunicator = (ListFragment.FragmentCommunicator) context;
+            fragmentCommunicator = (MoviesListFragment.FragmentCommunicator) context;
         } else {
             throw new RuntimeException(context.toString() + " must implement fragmentCommunicator");
         }

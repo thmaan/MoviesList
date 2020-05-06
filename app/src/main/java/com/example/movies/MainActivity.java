@@ -11,16 +11,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ListFragment.FragmentCommunicator, ActorFragment.FragmentCommunicator, DirectorFragment.FragmentCommunicator, AddMovieFragment.FragmentCommunicator, AddActorFragment.FragmentCommunicator, AddDirectorFragment.FragmentCommunicator {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MoviesListFragment.FragmentCommunicator, ActorFragment.FragmentCommunicator, DirectorFragment.FragmentCommunicator, AddMovieFragment.FragmentCommunicator, AddActorFragment.FragmentCommunicator, AddDirectorFragment.FragmentCommunicator {
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
@@ -39,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbarCode();
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.container_fragment, new ListFragment());
+        fragmentTransaction.add(R.id.container_fragment, new MoviesListFragment());
         fragmentTransaction.commit();
         protagonist = findViewById(R.id.protagonist);
         directors = findViewById(R.id.director);
@@ -65,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (item.getItemId() == R.id.home) {
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.container_fragment, new ListFragment());
+            fragmentTransaction.replace(R.id.container_fragment, new MoviesListFragment());
             fragmentTransaction.commit();
         }
         if (item.getItemId() == R.id.actor) {
@@ -106,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case 3:
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.container_fragment, new ListFragment());
+                fragmentTransaction.replace(R.id.container_fragment, new MoviesListFragment());
                 fragmentTransaction.commit();
                 break;
             case 4:

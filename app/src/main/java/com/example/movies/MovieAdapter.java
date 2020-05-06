@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         TextView tvDirector;
         TextView tvYear;
         TextView tvProtagonist;
+        ImageView picture;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
@@ -34,6 +36,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             tvDirector = itemView.findViewById(R.id.tvDirector);
             tvYear = itemView.findViewById(R.id.tvYear);
             tvProtagonist = itemView.findViewById(R.id.tvProtagonist);
+            picture = itemView.findViewById(R.id.picture);
         }
     }
     @NonNull
@@ -47,6 +50,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull MovieAdapter.ViewHolder holder, int position) {
         holder.itemView.setTag(movies.get(position));
 
+        holder.picture.setImageResource(movies.get(position).getPicture());
         holder.tvName.setText(movies.get(position).getTitle());
         holder.tvGenre.setText(movies.get(position).getGenre());
         holder.tvDirector.setText(movies.get(position).getDirector().getName());
