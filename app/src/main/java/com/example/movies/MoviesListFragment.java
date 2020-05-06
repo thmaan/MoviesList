@@ -7,20 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Objects;
+
 public class MoviesListFragment extends Fragment implements View.OnClickListener {
-    FragmentCommunicator fragmentCommunicator;
-    RecyclerView recyclerView;
-    RecyclerView.Adapter myAdapter;
-    RecyclerView.LayoutManager layoutManager;
-    View view;
-    Button newMovie;
+    private FragmentCommunicator fragmentCommunicator;
+    private View view;
+
     public interface FragmentCommunicator {
-        public void fragmentContactActivity(int a);
+        void fragmentContactActivity(int a);
     }
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
 
@@ -31,24 +31,25 @@ public class MoviesListFragment extends Fragment implements View.OnClickListener
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        RecyclerView recyclerView;
+        RecyclerView.Adapter myAdapter;
+        RecyclerView.LayoutManager layoutManager;
+        Button newMovie;
+
         recyclerView = view.findViewById(R.id.list);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        myAdapter = new MovieAdapter(this.getActivity(), ApplicationClass.movies);
+        myAdapter = new MovieAdapter(ApplicationClass.movies);
         recyclerView.setAdapter(myAdapter);
 
-        newMovie = getActivity().findViewById(R.id.newMovie);
+        newMovie = Objects.requireNonNull(getActivity()).findViewById(R.id.newMovie);
         newMovie.setOnClickListener(this);
 
     }
-    public void notifyDataChange(){
-        myAdapter.notifyDataSetChanged();
-    }
-
     @Override
-    public void onAttach(Context activity) {
+    public void onAttach(@NonNull Context activity) {
         super.onAttach(activity);
         try {
             fragmentCommunicator = (FragmentCommunicator) activity;
@@ -59,12 +60,7 @@ public class MoviesListFragment extends Fragment implements View.OnClickListener
     }
     @Override
     public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.newMovie:
-                    fragmentCommunicator.fragmentContactActivity(0);
-                    break;
-                default:
-                    break;
-        }
+        if(v.getId() == R.id.newMovie)
+            fragmentCommunicator.fragmentContactActivity(0);
     }
 }

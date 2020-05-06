@@ -1,11 +1,13 @@
 package com.example.movies;
 
+import androidx.annotation.NonNull;
+
 public class Actor {
     private String name;
     private String birthDate;
     private int picture;
 
-    public Actor(String name, String birthDate) {
+    Actor(String name, String birthDate) {
         this.name = name;
         this.birthDate = birthDate;
         picture = R.drawable.tenor;
@@ -19,17 +21,13 @@ public class Actor {
         this.name = name;
     }
 
-    public String getBirthDate() {
+    String getBirthDate() {
         return birthDate;
     }
-
-    public int getPicture() {
+    int getPicture() {
         return picture;
     }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
-    }
+    @NonNull
     @Override
     public String toString(){
         return name;

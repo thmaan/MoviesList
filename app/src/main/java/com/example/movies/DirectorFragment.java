@@ -7,21 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Objects;
+
 public class DirectorFragment extends Fragment implements View.OnClickListener {
-    FragmentCommunicator fragmentCommunicator;
-    RecyclerView recyclerView;
-    RecyclerView.Adapter myAdapter;
-    RecyclerView.LayoutManager layoutManager;
-    View view;
-    Button newDirector;
+    private FragmentCommunicator fragmentCommunicator;
+    private View view;
 
     public interface FragmentCommunicator {
-        public void fragmentContactActivity(int a);
+         void fragmentContactActivity(int a);
     }
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
         view = inflater.inflate(R.layout.fragment_second, container, false);
@@ -31,21 +30,26 @@ public class DirectorFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        RecyclerView recyclerView;
+        RecyclerView.Adapter myAdapter;
+        RecyclerView.LayoutManager layoutManager;
+
+        Button newDirector;
 
         recyclerView = view.findViewById(R.id.directorList);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        myAdapter = new DirectorAdapter(this.getActivity(), ApplicationClass.directors);
+        myAdapter = new DirectorAdapter(ApplicationClass.directors);
         recyclerView.setAdapter(myAdapter);
 
-        newDirector = getActivity().findViewById(R.id.newDirector);
+        newDirector = Objects.requireNonNull(getActivity()).findViewById(R.id.newDirector);
         newDirector.setOnClickListener(this);
 
     }
     @Override
-    public void onAttach(Context activity) {
+    public void onAttach(@NonNull Context activity) {
         super.onAttach(activity);
         try {
             fragmentCommunicator = (FragmentCommunicator) activity;
@@ -56,12 +60,7 @@ public class DirectorFragment extends Fragment implements View.OnClickListener {
     }
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.newDirector:
-                fragmentCommunicator.fragmentContactActivity(2);
-                break;
-            default:
-                break;
-        }
+        if(v.getId() == R.id.newDirector)
+            fragmentCommunicator.fragmentContactActivity(2);
     }
 }

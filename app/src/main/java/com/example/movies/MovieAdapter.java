@@ -1,6 +1,5 @@
 package com.example.movies;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -17,11 +15,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     private ArrayList<Movie> movies;
 
-    public MovieAdapter(Context context, ArrayList<Movie> list){
+    MovieAdapter(ArrayList<Movie> list){
         movies = list;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvName;
         TextView tvGenre;
@@ -29,9 +27,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         TextView tvYear;
         TextView tvProtagonist;
         ImageView picture;
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = (TextView) itemView.findViewById(R.id.tvName);
+            tvName = itemView.findViewById(R.id.tvName);
             tvGenre = itemView.findViewById(R.id.tvGenre);
             tvDirector = itemView.findViewById(R.id.tvDirector);
             tvYear = itemView.findViewById(R.id.tvYear);

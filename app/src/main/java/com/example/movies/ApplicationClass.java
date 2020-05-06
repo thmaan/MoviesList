@@ -13,9 +13,9 @@ public class ApplicationClass extends Application {
     public void onCreate() {
         super.onCreate();
 
-        movies = new ArrayList<Movie>();
-        actors = new ArrayList<Actor>();
-        directors = new ArrayList<Director>();
+        movies = new ArrayList<>();
+        actors = new ArrayList<>();
+        directors = new ArrayList<>();
 
         Actor wm = new Actor("Wagner Moura","1970");
         actors.add(wm);

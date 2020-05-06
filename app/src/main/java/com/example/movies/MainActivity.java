@@ -15,7 +15,7 @@ import android.widget.Spinner;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MoviesListFragment.FragmentCommunicator, ActorFragment.FragmentCommunicator, DirectorFragment.FragmentCommunicator, AddMovieFragment.FragmentCommunicator, AddActorFragment.FragmentCommunicator, AddDirectorFragment.FragmentCommunicator {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, MoviesListFragment.FragmentCommunicator, ActorFragment.FragmentCommunicator, DirectorFragment.FragmentCommunicator {
 
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;

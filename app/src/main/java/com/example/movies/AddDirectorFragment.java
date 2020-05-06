@@ -10,26 +10,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
+
 
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.Objects;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AddDirectorFragment extends Fragment {
-    DirectorFragment.FragmentCommunicator fragmentCommunicator;
-    private Button buttonAdd;
+    private DirectorFragment.FragmentCommunicator fragmentCommunicator;
     private TextInputEditText name;
     private TextInputEditText year;
 
-    public interface FragmentCommunicator {
-        public void fragmentContactActivity(int a);
-    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Button buttonAdd;
         View view = inflater.inflate(R.layout.add_person,container,false) ;
         buttonAdd = view.findViewById(R.id.add);
         name = view.findViewById(R.id.tvNamePerson);
@@ -39,7 +38,7 @@ public class AddDirectorFragment extends Fragment {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Director director = new Director(name.getText().toString(),year.getText().toString());
+                Director director = new Director(Objects.requireNonNull(name.getText()).toString(), Objects.requireNonNull(year.getText()).toString());
                 ApplicationClass.directors.add(director);
                 fragmentCommunicator.fragmentContactActivity(5);
             }
@@ -49,7 +48,7 @@ public class AddDirectorFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof AddMovieFragment.FragmentCommunicator) {
+        if (context instanceof DirectorFragment.FragmentCommunicator) {
             fragmentCommunicator = (DirectorFragment.FragmentCommunicator) context;
         } else {
             throw new RuntimeException(context.toString() + " must implement fragmentCommunicator");

@@ -7,23 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Objects;
+
 public class ActorFragment extends Fragment implements View.OnClickListener {
-    FragmentCommunicator fragmentCommunicator;
-    RecyclerView recyclerView;
-    RecyclerView.Adapter myAdapter;
-    RecyclerView.LayoutManager layoutManager;
-    View view;
-    Button newActor;
+    private FragmentCommunicator fragmentCommunicator;
+    private View view;
 
     public interface FragmentCommunicator {
-        public void fragmentContactActivity(int a);
+        void fragmentContactActivity(int a);
     }
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState){
+
         view = inflater.inflate(R.layout.fragment_first, container, false);
         return view;
     }
@@ -31,21 +31,27 @@ public class ActorFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        RecyclerView recyclerView;
+        RecyclerView.Adapter myAdapter;
+        RecyclerView.LayoutManager layoutManager;
+        Button newActor;
 
         recyclerView = view.findViewById(R.id.actorList);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);
 
-        myAdapter = new ActorAdapter(this.getActivity(), ApplicationClass.actors);
+        myAdapter = new ActorAdapter(ApplicationClass.actors);
         recyclerView.setAdapter(myAdapter);
 
-        newActor = getActivity().findViewById(R.id.newActor);
+
+        newActor = Objects.requireNonNull(getActivity()).findViewById(R.id.newActor);
         newActor.setOnClickListener(this);
 
     }
+
     @Override
-    public void onAttach(Context activity) {
+    public void onAttach(@NonNull Context activity) {
         super.onAttach(activity);
         try {
             fragmentCommunicator = (FragmentCommunicator) activity;
@@ -56,12 +62,8 @@ public class ActorFragment extends Fragment implements View.OnClickListener {
     }
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.newActor:
-                fragmentCommunicator.fragmentContactActivity(1);
-                break;
-            default:
-                break;
+        if(v.getId() == R.id.newActor)
+            fragmentCommunicator.fragmentContactActivity(1);
         }
-    }
 }
+

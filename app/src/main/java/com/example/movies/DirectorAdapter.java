@@ -1,6 +1,5 @@
 package com.example.movies;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,22 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.PropertyResourceBundle;
 
 public class DirectorAdapter extends RecyclerView.Adapter<DirectorAdapter.ViewHolder> {
 
     private ArrayList<Director> directors;
 
-    public DirectorAdapter(Context context, ArrayList<Director> list){
+    DirectorAdapter(ArrayList<Director> list){
         directors = list;
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvNamePerson;
         TextView tvBirthDate;
         ImageView profile;
-        public ViewHolder(@NonNull View itemView) {
+            ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNamePerson = itemView.findViewById(R.id.tvNamePerson);
             tvBirthDate = itemView.findViewById(R.id.tvBirthDate);

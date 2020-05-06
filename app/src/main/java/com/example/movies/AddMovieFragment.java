@@ -16,28 +16,25 @@ import android.widget.Spinner;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.Objects;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AddMovieFragment extends Fragment {
-    MoviesListFragment.FragmentCommunicator fragmentCommunicator;
-
-    private Button buttonAdd;
+    private MoviesListFragment.FragmentCommunicator fragmentCommunicator;
     private TextInputEditText genre;
     private TextInputEditText year;
     private TextInputEditText title;
-    public Spinner director;
-    public Spinner protagonist;
-    Actor newActor;
-    Director newDirector;
-    public interface FragmentCommunicator {
-        public void fragmentContactActivity(int a);
-    }
-
+    private Actor newActor;
+    private Director newDirector;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Button buttonAdd;
+        Spinner director;
+        Spinner protagonist;
         View view = inflater.inflate(R.layout.fragment_add_movie, container, false);
         buttonAdd = view.findViewById(R.id.addNewMovie);
         genre = view.findViewById(R.id.genre);
@@ -46,7 +43,8 @@ public class AddMovieFragment extends Fragment {
         director = view.findViewById(R.id.director);
         protagonist = view.findViewById(R.id.protagonist);
 
-        ArrayAdapter<Actor> adapter = new ArrayAdapter<Actor>(getActivity(), android.R.layout.simple_spinner_item, ApplicationClass.actors);
+        ArrayAdapter<Actor> adapter = new ArrayAdapter<>(Objects.requireNonNull(getActivity()),
+                android.R.layout.simple_spinner_item, ApplicationClass.actors);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         protagonist.setAdapter(adapter);
 
@@ -61,7 +59,8 @@ public class AddMovieFragment extends Fragment {
 
             }
         });
-        ArrayAdapter<Director> adapter1 = new ArrayAdapter<Director>(getActivity(), android.R.layout.simple_spinner_item, ApplicationClass.directors);
+        ArrayAdapter<Director> adapter1 = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_item, ApplicationClass.directors);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         director.setAdapter(adapter1);
 
@@ -79,7 +78,10 @@ public class AddMovieFragment extends Fragment {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ApplicationClass.movies.add(new Movie(title.getText().toString(), year.getText().toString(), genre.getText().toString(),newDirector,newActor));
+                ApplicationClass.movies.add(new Movie(Objects.requireNonNull(title.getText()).toString(),
+                        Objects.requireNonNull(year.getText()).toString(),
+                        Objects.requireNonNull(genre.getText()).toString(),
+                        newDirector,newActor));
                 fragmentCommunicator.fragmentContactActivity(3);
             }
         });
@@ -90,7 +92,7 @@ public class AddMovieFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof FragmentCommunicator) {
+        if (context instanceof MoviesListFragment.FragmentCommunicator) {
             fragmentCommunicator = (MoviesListFragment.FragmentCommunicator) context;
         } else {
             throw new RuntimeException(context.toString() + " must implement fragmentCommunicator");
