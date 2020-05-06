@@ -24,6 +24,5 @@ public class ApplicationClass extends Application {
         Director jp = new Director("José Padilha","1967");
         directors.add(jp);
         movies.add(new Movie("Tropa de Elite","2012","Ação",jp,wm));
-
     }
 }

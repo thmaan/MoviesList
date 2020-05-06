@@ -12,7 +12,9 @@
         android:layout_gravity="right"
         android:layout_marginTop="?actionBarSize"
         android:clickable="true"
-        android:text="ADD MOVIE" />
+        android:text="ADD MOVIE"
+        android:textColor="@color/green"
+        android:background="@color/black"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
